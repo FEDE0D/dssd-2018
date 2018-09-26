@@ -1,4 +1,4 @@
-package com.dssd.grupo8.dssdbackend;
+package com.dssd.grupo8;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

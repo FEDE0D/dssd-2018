@@ -7,7 +7,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 @NoRepositoryBean
 public interface GenericRepository<T> extends EntityGraphJpaRepository<T, Long> {
 
-    @Query("SELECT 1;")
+    @Query("SELECT 1 from Coupon")
     void testConnection();
 
 }

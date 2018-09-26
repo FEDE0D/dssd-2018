@@ -1,4 +1,4 @@
-package com.dssd.grupo8.dssdbackend;
+package com.dssd.grupo8;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
