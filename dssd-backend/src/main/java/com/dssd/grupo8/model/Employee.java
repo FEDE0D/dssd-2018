@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -24,7 +25,7 @@ public class Employee {
 
     @NotNull
     @NonNull
-    private String surename;
+    private String surname;
 
     @NotNull
     @NonNull
@@ -34,7 +35,7 @@ public class Employee {
 
     @NotNull
     @NonNull
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "employeetype")
     private EmployeeType type;
 

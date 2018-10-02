@@ -5,13 +5,10 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@RequiredArgsConstructor
 public class CouponUpdateDTO {
 
-    @NonNull
     private Long number;
 
-    @NonNull
     private boolean used;
 
 }
