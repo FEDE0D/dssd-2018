@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public abstract class GenericService<Model, Repository extends GenericRepository<Model>, CreationDTO, UpdateDTO> {
+public abstract class GenericService<Model, Repository extends GenericRepository<Model>, ModelDTO, CreationDTO, UpdateDTO> {
 
     Repository repository;
 
@@ -28,9 +28,13 @@ public abstract class GenericService<Model, Repository extends GenericRepository
     }
 
     @Transactional
-    public abstract Model createFromDTO(CreationDTO creationDTO);
+    public abstract ModelDTO createFromDTO(CreationDTO creationDTO);
 
     @Transactional
-    public abstract Model updateFromDTO(Long id, UpdateDTO updateDTO);
+    public abstract ModelDTO updateFromDTO(Long id, UpdateDTO updateDTO);
 
+    @Transactional
+    public void deleteById(Long id) {
+        this.repository.deleteById(id);
+    }
 }

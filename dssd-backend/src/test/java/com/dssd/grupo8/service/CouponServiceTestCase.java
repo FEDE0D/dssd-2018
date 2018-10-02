@@ -1,5 +1,6 @@
 package com.dssd.grupo8.service;
 
+import com.dssd.grupo8.dto.CouponCreateDTO;
 import com.dssd.grupo8.dto.CouponDTO;
 import com.dssd.grupo8.model.Coupon;
 import lombok.Getter;
@@ -26,7 +27,7 @@ public class CouponServiceTestCase {
 
     @Test
     public void basicTest() {
-        CouponDTO coupon = service.createCoupon(123L, true);
+        CouponDTO coupon = service.createFromDTO(new CouponCreateDTO(123L, true));
         Assert.assertNotNull(coupon.getId());
         Assert.assertEquals((long) coupon.getNumber(), 123L);
         Assert.assertTrue(coupon.isUsed());

@@ -7,11 +7,10 @@ import com.dssd.grupo8.model.Coupon;
 import com.dssd.grupo8.repository.CouponRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CouponService extends GenericService<Coupon, CouponRepository, CouponCreateDTO, CouponUpdateDTO> {
+public class CouponService extends GenericService<Coupon, CouponRepository, CouponDTO, CouponCreateDTO, CouponUpdateDTO> {
 
     @Autowired
     public CouponService(CouponRepository repository, ModelMapper modelMapper) {
@@ -19,21 +18,22 @@ public class CouponService extends GenericService<Coupon, CouponRepository, Coup
     }
 
     @Override
-    public Coupon createFromDTO(CouponCreateDTO createDTO) {
-        return null;
+    public CouponDTO createFromDTO(CouponCreateDTO createDTO) {
+        Coupon coupon = new Coupon();
+        coupon.setNumber(createDTO.getNumber());
+        coupon.setUsed(createDTO.isUsed());
+        this.repository.save(coupon);
+
+        return this.modelMapper.map(coupon, CouponDTO.class);
     }
 
     @Override
-    public Coupon updateFromDTO(Long id, CouponUpdateDTO updateDTO) {
-        return null;
-    }
+    public CouponDTO updateFromDTO(Long id, CouponUpdateDTO updateDTO) {
+        Coupon coupon = this.findById(id);
+        coupon.setNumber(updateDTO.getNumber());
+        coupon.setUsed(updateDTO.isUsed());
+        this.repository.save(coupon);
 
-    public CouponDTO createCoupon(long number, boolean used) {
-        Coupon coupon = new Coupon();
-        coupon.setNumber(number);
-        coupon.setUsed(used);
-
-        coupon = this.repository.save(coupon);
         return this.modelMapper.map(coupon, CouponDTO.class);
     }
 
