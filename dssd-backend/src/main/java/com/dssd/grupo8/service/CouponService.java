@@ -1,6 +1,8 @@
 package com.dssd.grupo8.service;
 
+import com.dssd.grupo8.dto.CouponCreateDTO;
 import com.dssd.grupo8.dto.CouponDTO;
+import com.dssd.grupo8.dto.CouponUpdateDTO;
 import com.dssd.grupo8.model.Coupon;
 import com.dssd.grupo8.repository.CouponRepository;
 import org.modelmapper.ModelMapper;
@@ -9,11 +11,21 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CouponService extends GenericService<Coupon, CouponRepository> {
+public class CouponService extends GenericService<Coupon, CouponRepository, CouponCreateDTO, CouponUpdateDTO> {
 
     @Autowired
     public CouponService(CouponRepository repository, ModelMapper modelMapper) {
         super(repository, modelMapper);
+    }
+
+    @Override
+    public Coupon createFromDTO(CouponCreateDTO createDTO) {
+        return null;
+    }
+
+    @Override
+    public Coupon updateFromDTO(Long id, CouponUpdateDTO updateDTO) {
+        return null;
     }
 
     public CouponDTO createCoupon(long number, boolean used) {
@@ -24,4 +36,5 @@ public class CouponService extends GenericService<Coupon, CouponRepository> {
         coupon = this.repository.save(coupon);
         return this.modelMapper.map(coupon, CouponDTO.class);
     }
+
 }
