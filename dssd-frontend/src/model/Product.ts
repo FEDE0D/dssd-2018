@@ -2,9 +2,7 @@ import { ProductType } from "./ProductType";
 
 export class Product {
 
-    public id:number;
-
-    constructor(name:string, costPrice:number, salePrice:number, type: ProductType) {
+    constructor(public id:number, public name:string, public costPrice:number, public salePrice:number, public type: ProductType) {
 
     }
 

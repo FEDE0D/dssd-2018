@@ -1,3 +1,31 @@
-<p>
-  products works!
-</p>
+<div class="container ">
+  <div class="col-6 justify-content-md-center">
+    <h4>Lista de productos</h4>
+  </div>
+
+  <div class="col-6 justify-content-md-center">
+    <ul class="list-unstyled">
+      <li *ngFor="let product of products">
+        <div class="row p-2">
+          <div class="col-6">
+            {{ product.name }} ${{ product.salePrice }}
+          </div>
+          <div class="col-6">
+            <input type="number" min="0" max="99" [(ngModel)]="cart[product.id]"/>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-6 justify-content-md-center">
+    <div class="row">
+      <div class="col-6">
+        <b>Total:</b> ${{ getTotal() }}
+      </div>
+      <div class="col-6">
+        <button class="btn btn-primary" (click)="shop()" [disabled]="getTotal() == 0">Comprar</button>
+      </div>
+    </div>
+  </div>
+</div>
