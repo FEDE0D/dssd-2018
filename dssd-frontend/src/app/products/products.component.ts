@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Product } from '../../model/Product';
-import { ProductType } from '../../model/ProductType';
+import { Product } from '../model/Product';
+import { ProductType } from '../model/ProductType';
+import { OrderService } from '../service/order.service';
+import { Order } from '../model/Order';
 
 @Component({
   selector: 'app-products',
@@ -13,7 +15,7 @@ export class ProductsComponent implements OnInit {
   public products:Array<Product> = [];
   public cart:{[key:number]:number} = {};
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, private orderService: OrderService) { }
 
   ngOnInit() {
     this.products.push(new Product(1, "Leche", 18, 23, ProductType.CommonType));
@@ -33,7 +35,17 @@ export class ProductsComponent implements OnInit {
   }
 
   public shop() {
-    localStorage.setItem("order", JSON.stringify(this.cart));
+    let items:Array<{product:Product, count:number}> = [];
+    Object.keys(this.cart).forEach(key => {
+      items.push({
+        product: this.products.filter(p => p.id == Number(key))[0],
+        count: this.cart[key]
+      });
+      items = items.filter(i => i.count > 0);
+    });
+
+    this.orderService.saveUserOrder(new Order(items, this.getTotal()));
+
     this.router.navigate(['/order']);
   }
 

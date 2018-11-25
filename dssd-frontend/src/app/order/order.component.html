@@ -1,3 +1,40 @@
-<p>
-  order works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12 justify-content-md-center">
+      <h4>Compra</h4>
+      <p>Estás a punto de comprar estos productos</p>
+    </div>
+    <div class="col-6 justify-content-md-center">
+      <ul class="list-unstyled">
+        <li *ngFor="let item of order.items">
+          <div class="row">
+            <div class="col-6">{{ item.product.name }} <small>${{item.product.salePrice}} x{{ item.count }}</small></div>
+            <div class="col-6">${{ item.product.salePrice * item.count }}</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <div class="row">
+        <div class="col-6">
+          <b>Total: </b>
+        </div>
+        <div class="col-6">
+            ${{ order.total }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row p-2">
+    <button class="btn btn-primary" (click)="shop()">Comprar</button>
+  </div>
+
+  
+  
+</div>

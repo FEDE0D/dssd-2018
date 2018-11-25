@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { OrderService } from '../service/order.service';
+import { Order } from '../model/Order';
 
 @Component({
   selector: 'app-order',
@@ -8,11 +10,17 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class OrderComponent implements OnInit {
 
-  constructor(private route:ActivatedRoute, private router: Router) { }
+  private order:Order;
+
+  constructor(private route:ActivatedRoute, private router: Router, private orderService:OrderService) { }
 
   ngOnInit() {
-    let order = JSON.parse(localStorage.getItem("order"));
-    console.log(order);
+    this.order = this.orderService.getUserOrder();
+  }
+
+  public shop() {
+    alert(`La compra fue realizada exitosamente`);
+    this.router.navigate(['/home']);
   }
 
 
